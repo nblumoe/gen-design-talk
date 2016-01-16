@@ -1,0 +1,8 @@
+* Outline                                                               :toc:
+ - [[#what-is-generative-design][What is Generative Design?]]
+ - [[#why-to-use-it][Why to use it?]]
+ - [[#how-does-it-work][How does it work?]]
+
+* What is Generative Design?
+* Why to use it?
+* How does it work?
