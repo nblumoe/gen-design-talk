@@ -6,7 +6,8 @@
             [gen-design-talk.trees :as trees]
             [gen-design-talk.utils :as utils :refer [fullscreen-image-slide section]]
             [quil.core :as q]
-            [quil.middleware :as m]))
+            [quil.middleware :as m]
+            [gen-design-talk.creatures :as creatures]))
 
 (defn sketches []
   [trees/sketch
@@ -43,9 +44,11 @@
 
    (:simple noise-2d/sketches)
    (:fog noise-2d/sketches)
+   (:rotations noise-2d/sketches)
    (:with-fog scenery/sketches)
 
-   (:rotations noise-2d/sketches)
+   (:simple creatures/sketches)
+   (:with-creatures scenery/sketches)
 
    (section "How?" [60 50 100])
 

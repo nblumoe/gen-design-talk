@@ -1,10 +1,16 @@
 (ns gen-design-talk.scenery
-  (:require [gen-design-talk.lines :as lines]
+  (:require [gen-design-talk.creatures :as creatures]
+            [gen-design-talk.lines :as lines]
+            [gen-design-talk.noise-2d :as noise]
+            [gen-design-talk.creatures :as creatures]
             [gen-design-talk.utils :as utils]
             [quil.core :as q]
-            [gen-design-talk.noise-2d :as noise]))
+            ))
 
 (defn parallax-landscape []
+  (q/background 140 250 10)
+  (q/no-stroke)
+
   (let [num-backgrounds 2
         x-min -20
         x-max (+ 20 (q/width))
@@ -32,11 +38,13 @@
                 (concat (range 0 (inc num-backgrounds)) [5]))))
   )
 
+(defn foggy-landscape [noise-seed]
+  (parallax-landscape)
+  (noise/fog 12 0.002 noise-seed 170))
+
 (def sketches
   {:simple
    {:draw  (fn [state]
-             (q/background 140 250 10)
-             (q/no-stroke)
              (parallax-landscape)
              state)}
 
@@ -48,11 +56,33 @@
     :update (fn [state]
               (update-in state [:noise-seed] + 0.01))
     :draw  (fn [{:keys [noise-seed] :as state}]
-             (q/background 140 250 10)
-             (q/no-stroke)
+             (foggy-landscape noise-seed)
+             state)}
+
+   :with-creatures
+   {:init (fn [state]
+            (assoc state :noise-seed (rand 1000)
+                   :creatures (repeatedly 10 (fn [] (assoc (creatures/create-creature)
+                                                           :position [(rand (q/width))
+                                                                      (+ (- (rand 100) 50) (* 0.8 (q/height)))])))))
+    :update (fn [state]
+              (-> state
+                  (update-in [:noise-seed] + 0.01)
+                  (update :creatures (fn [creatures]
+                                       (map #(update % :position (fn [[x y]]
+                                                                   (if (< x -10)
+                                                                     [(+ (rand 20) (+ 10 (q/width)))
+                                                                      (+ (- (rand 100) 50) (* 0.8 (q/height)))]
+                                                                     [(- x 15) y]))) creatures)
+                                       ))
+                  ))
+    :draw  (fn [{:keys [noise-seed creatures] :as state}]
              (parallax-landscape)
+             (doseq [creature (sort-by #(second (:position %)) creatures)]
+               (q/with-translation (:position creature)
+                 (creatures/draw-creature creature)))
+             (q/no-stroke)
              (noise/fog 12 0.002 noise-seed 170)
              state
-             )}
-   }
+             )}}
   )
