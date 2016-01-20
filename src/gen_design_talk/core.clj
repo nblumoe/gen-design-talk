@@ -2,6 +2,7 @@
   (:require [gen-design-talk.circles :as circles]
             [gen-design-talk.lines :as lines]
             [gen-design-talk.noise-2d :as noise-2d]
+            [gen-design-talk.scenery :as scenery]
             [gen-design-talk.trees :as trees]
             [gen-design-talk.utils :as utils :refer [fullscreen-image-slide section]]
             [quil.core :as q]
@@ -30,7 +31,7 @@
    (:randomized lines/sketches)
    (:perlin lines/sketches)
    (:perlin-multi lines/sketches)
-   (:parallax lines/sketches)
+   (:simple scenery/sketches)
 
    (:circle circles/sketches)
    (:spiral circles/sketches)
@@ -41,6 +42,9 @@
    (:fuzzicle circles/sketches)
 
    (:simple noise-2d/sketches)
+   (:fog noise-2d/sketches)
+   (:with-fog scenery/sketches)
+
    (:rotations noise-2d/sketches)
 
    (section "How?" [60 50 100])
