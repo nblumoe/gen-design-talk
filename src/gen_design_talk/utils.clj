@@ -40,16 +40,15 @@
                     :render? re-render?
                     :re-render? false))})
 
-(defn scheduled-rendering-handlers [intervall]
-  {:init (fn [state]
-           (assoc state :last-render -1))
-   :update (fn [{:keys [last-render] :as state}]
-             (let [current-slot (int (/ (q/millis) intervall))
-                   re-render? (> current-slot last-render)]
-               (assoc state
-                      :render? re-render?
-                      :last-render current-slot)))}
-  )
+(defn scheduled-rendering-handlers
+  ([] (scheduled-rendering-handlers 1000))
+  ([intervall]
+   {:init (fn [state]
+            (assoc state :last-render 0))
+    :update (fn [{:keys [last-render] :as state}]
+              (if (> (- (q/millis) last-render) intervall)
+                (assoc state :last-render (q/millis) :render? true)
+                (assoc state :render? false)))}))
 
 (defn section
   ([title]

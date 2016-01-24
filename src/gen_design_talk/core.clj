@@ -69,6 +69,7 @@
    (:simple grid/sketches)
    (:more-directions grid/sketches)
    (:line-styles grid/sketches)
+   (:line-styles2 grid/sketches)
 
    (section "How?" [60 50 100])
    (fullscreen-image-slide "processing.png")
@@ -124,7 +125,7 @@
 
 (q/defsketch gen-design-talk
   :title "Generative Design Talk"
-  :size [500 500]
+  :size [1024 768]
   :setup reset
   :settings (fn [] (q/smooth 8))
   :update update-state
