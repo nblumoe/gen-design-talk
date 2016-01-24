@@ -51,6 +51,12 @@
    (:with-creatures scenery/sketches)
 
    (section "How?" [60 50 100])
+   (fullscreen-image-slide "processing.png")
+   (fullscreen-image-slide "thing.png")
+   (fullscreen-image-slide "node_box.png")
+
+   (fullscreen-image-slide "generativedesign.jpg")
+   (fullscreen-image-slide "generativeart.jpg")
 
    ])
 

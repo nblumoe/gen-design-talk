@@ -93,6 +93,7 @@
                             (draw-tree (gen-tree))))]
 
              (background)
+             (q/fill 0 0 250)
              (utils/center-text "Generative Design")
              (q/stroke 100 0 30)
              (trees))

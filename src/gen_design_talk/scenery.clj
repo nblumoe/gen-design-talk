@@ -7,8 +7,12 @@
             [quil.core :as q]
             ))
 
-(defn parallax-landscape []
-  (q/background 140 250 10)
+(defn parallax-landscape [& {:keys [background-color
+                                    hue saturation]
+                             :or {background-color [140 250 10]
+                                  hue 0
+                                  saturation 0}}]
+  (apply q/background background-color)
   (q/no-stroke)
 
   (let [num-backgrounds 2
@@ -29,7 +33,7 @@
                   (q/end-shape))
         time (q/millis)]
     (dorun (map (fn [n]
-                  (q/fill 0 0 (+ (* n 10) 25))
+                  (q/fill hue saturation (+ (* n 10) 25))
                   (draw-bg (lines/perlin-line-segments (range x-min x-max 10)
                                                        (+ y-base (* (/  n 4) y-div))
                                                        (/ amplitude (* 0.15 (inc n)))
@@ -62,9 +66,9 @@
    :with-creatures
    {:init (fn [state]
             (assoc state :noise-seed (rand 1000)
-                   :creatures (repeatedly 10 (fn [] (assoc (creatures/create-creature)
-                                                           :position [(rand (q/width))
-                                                                      (+ (- (rand 100) 50) (* 0.8 (q/height)))])))))
+                   :creatures (repeatedly 4 (fn [] (assoc (creatures/create-creature)
+                                                          :position [(rand (q/width))
+                                                                     (+ (- (rand 100) 50) (* 0.8 (q/height)))])))))
     :update (fn [state]
               (-> state
                   (update-in [:noise-seed] + 0.01)
@@ -77,12 +81,12 @@
                                        ))
                   ))
     :draw  (fn [{:keys [noise-seed creatures] :as state}]
-             (parallax-landscape)
+             (parallax-landscape :hue 100 :saturation 220 :background-color [50 200 40])
              (doseq [creature (sort-by #(second (:position %)) creatures)]
                (q/with-translation (:position creature)
                  (creatures/draw-creature creature)))
              (q/no-stroke)
-             (noise/fog 12 0.002 noise-seed 170)
+             (noise/fog 12 0.004 noise-seed 170)
              state
              )}}
   )

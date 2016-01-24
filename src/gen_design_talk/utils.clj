@@ -24,7 +24,9 @@
   (q/text text (:x (screen-center)) (* 0.66 (:y (screen-center)))))
 
 (defn image [filename]
-  (q/image (q/load-image filename) 0 0 (q/width) (q/height)))
+  (q/background 0)
+  (q/image-mode :center)
+  (q/image (q/load-image filename) (:x (screen-center)) (:y (screen-center))))
 
 (defn fullscreen-image-slide [filename]
   {:draw (fn [state]
@@ -56,4 +58,5 @@
    {:title title
     :draw (fn [state]
             (apply q/background color)
+            (q/fill (first color) 80 250)
             (center-text title))}))
