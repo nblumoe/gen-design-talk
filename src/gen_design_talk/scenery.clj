@@ -65,6 +65,7 @@
 
    :with-creatures
    {:init (fn [state]
+            (q/frame-rate 30)
             (assoc state :noise-seed (rand 1000)
                    :creatures (repeatedly 4 (fn [] (assoc (creatures/create-creature)
                                                           :position [(rand (q/width))

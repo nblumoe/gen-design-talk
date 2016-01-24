@@ -1,5 +1,6 @@
 (ns gen-design-talk.core
   (:require [gen-design-talk.circles :as circles]
+            [gen-design-talk.grid :as grid]
             [gen-design-talk.lines :as lines]
             [gen-design-talk.noise-2d :as noise-2d]
             [gen-design-talk.scenery :as scenery]
@@ -64,6 +65,10 @@
 
                                         ; quil-sratches/circle
                                         ; quil-scratches/evo
+
+   (:simple grid/sketches)
+   (:more-directions grid/sketches)
+   (:line-styles grid/sketches)
 
    (section "How?" [60 50 100])
    (fullscreen-image-slide "processing.png")
