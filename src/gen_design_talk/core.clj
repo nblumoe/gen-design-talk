@@ -25,6 +25,13 @@
    (fullscreen-image-slide "avatar_cgi.jpg")
    (fullscreen-image-slide "3d-face-expression.jpg")
 
+   (fullscreen-image-slide "data_visualization.JPG")
+   (fullscreen-image-slide "cellular_logos.JPG")
+
+   (fullscreen-image-slide "exhibition.JPG")
+   (fullscreen-image-slide "installation.JPG")
+   (fullscreen-image-slide "font_print.JPG")
+
    (section "What?" [160 50 100])
 
    (:simple lines/sketches)
@@ -32,6 +39,9 @@
    (:randomized lines/sketches)
    (:perlin lines/sketches)
    (:perlin-multi lines/sketches)
+
+                                        ; quil-scratches/lines
+
    (:simple scenery/sketches)
 
    (:circle circles/sketches)
@@ -42,6 +52,8 @@
    (:fuzzicle-evo-2 circles/sketches)
    (:fuzzicle circles/sketches)
 
+                                        ; quil-scratches/worms
+
    (:simple noise-2d/sketches)
    (:fog noise-2d/sketches)
    (:rotations noise-2d/sketches)
@@ -49,6 +61,9 @@
 
    (:simple creatures/sketches)
    (:with-creatures scenery/sketches)
+
+                                        ; quil-sratches/circle
+                                        ; quil-scratches/evo
 
    (section "How?" [60 50 100])
    (fullscreen-image-slide "processing.png")
@@ -58,6 +73,8 @@
    (fullscreen-image-slide "generativedesign.jpg")
    (fullscreen-image-slide "generativeart.jpg")
 
+
+   (section "Thank you" [100 0 0])
    ])
 
 ;; SKETCH NAVIGATION
